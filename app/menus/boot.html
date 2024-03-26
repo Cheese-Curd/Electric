@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Electric [Booting...]</title>
+		<link rel="stylesheet" href="./styles/main.css">
+	</head>
+	<body>
+		<div style="display: block; margin-left: auto; margin-right: auto; margin-top: 250px; text-align: center;">
+			<img src="../svgs/white/icon.svg" width=128 height=128>
+			<div id="loadText">Loading Electric</div>
+		</div>
+		<div style="text-align: right; margin-top: 255px;">Press DEL to open BIOS Settings.</div>
+	</body>
+	<script>
+		var loadElem = document.getElementById("loadText");
+
+		setInterval(() => {
+			loadElem.innerText = loadElem.innerText + ".";
+			if (loadElem.innerText == "Loading Electric...")
+				loadElem.innerText = "Loading Electric"
+		}, 300);
+
+		document.body.addEventListener("keydown", function (event) {
+			if (event.key === "Delete")
+				window.location.replace("bios.html");
+		});
+
+		setTimeout(() => {
+			window.location.replace("login.html");
+		}, 3000);
+	</script>
+</html>

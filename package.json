@@ -1,0 +1,14 @@
+{
+  "name": "electric",
+  "version": "0.0.1",
+  "description": "An Electron OS Application",
+  "main": "app.js",
+  "scripts": {
+    "test": "electron ."
+  },
+  "author": "Eliana",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^29.1.5"
+  }
+}

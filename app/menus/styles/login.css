@@ -1,0 +1,53 @@
+#background {
+	filter: blur(8px);
+}
+
+#loginTitle {
+	color: black;
+	text-align: center;
+	margin-bottom: -15px;
+}
+
+#userImg {
+	margin: auto;
+}
+
+#usernameBox {
+	text-align: center;
+}
+
+#passwordBox {
+	text-align: center;
+}
+
+#loginBtn {
+	text-align: center;
+}
+
+#loginBox {
+	background: white;
+	border-radius: 8px;
+    height: 200px;
+    width: 200px;
+    display: grid;
+    margin: 250px auto auto auto;
+    align-items: center;
+    justify-content: center;
+}
+
+#loginErrorBox {
+	background: white;
+	border-radius: 8px;
+	height: 45px;
+	width: fit-content;
+	padding-left: 15px;
+	padding-right: 15px;
+	margin: auto;
+	margin-top: 15px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+	color: red;
+	transition: all 0.2s ease-in-out;
+	opacity: 0;
+}
