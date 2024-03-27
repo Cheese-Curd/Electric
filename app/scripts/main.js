@@ -1,4 +1,8 @@
+const fs = require("fs");
+const { encrypt } = require("../scripts/encryption");
+
 var taskbar = document.getElementById("taskbar");
+var curUser = fs.readFileSync("app/storage/electric/users/curUser",'utf8');
 
 function changeBg(path)
 {
@@ -51,13 +55,27 @@ function toggleStartMenu()
 	// console.log(startMenuOpen);
 }
 
-// TODO: fix it running twice when I try to fix the error output?
+function loaded()
+{
+	var blurDiv = document.getElementById("bluredDiv")
+	blurDiv.style.opacity = 0;
+	blurDiv.addEventListener("transitionend", (event) => {
+		taskbar.style.top = "650px";
+		blurDiv.remove();
+	});
+	
+	createTaskbarIcon("../storage/electric/apps/testApp.png");
+	console.log(curUser);
+}
 
-// var didLoad = false
-// document.addEventListener("DOMContentLoaded", () => {
-// 	if (didLoad)
-// 		return;
-// 	taskbar = document.getElementById("taskbar");
-// 	didLoad = true;
-// }, { once: true });
-createTaskbarIcon("../storage/electric/apps/testApp.png");
+function createUser(username, password)
+{
+	var userData = JSON.parse(fs.readFileSync("app/storage/electric/users/users.json"));
+
+	// Create a backup first
+	fs.writeFileSync('app/storage/electric/users/users.json.BACKUP', JSON.stringify(userData, null, 2), { encoding: 'utf8' });
+	
+	userData.users.push({"username": username, "password": encrypt(password)});
+	// Overwrite the file
+	fs.writeFileSync('app/storage/electric/users/users.json', JSON.stringify(userData, null, 2), { encoding: 'utf8' });
+}

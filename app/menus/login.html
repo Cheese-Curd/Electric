@@ -5,7 +5,7 @@
 		<link rel="stylesheet" href="./styles/main.css">
 		<link rel="stylesheet" href="./styles/login.css">
 	</head>
-	<body>
+	<body onload="loaded()">
 		<img id="background" width="1280px" height="720px" src="../storage/electric/background/welcome.png">
 		<div id="loginBox">
 			<p id="loginTitle">Login</p>
@@ -15,7 +15,7 @@
 			<button onclick="doLogin()" id="loginBtn">Login</button>
 		</div>
 		<div id="loginErrorBox">
-			<div id="loginError">ERROR: Lorum Ipsum :3</div>
+			<div id="loginError"></div>
 		</div>
 		<script src="../scripts/login.js"></script>
 	</body>

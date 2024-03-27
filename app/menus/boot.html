@@ -6,10 +6,10 @@
 	</head>
 	<body>
 		<div style="display: block; margin-left: auto; margin-right: auto; margin-top: 250px; text-align: center;">
-			<img src="../svgs/white/icon.svg" width=128 height=128>
-			<div id="loadText">Loading Electric</div>
+			<img id="loadIcon" style="opacity: 1; transition: opacity 0.2s ease-in-out;" src="../svgs/white/icon.svg" width=128 height=128>
+			<div id="loadText" style="opacity: 1; transition: opacity 0.2s ease-in-out;">Loading Electric</div>
 		</div>
-		<div style="text-align: right; margin-top: 255px;">Press DEL to open BIOS Settings.</div>
+		<div id="biosText" style="text-align: right; margin-top: 255px; opacity: 1; transition: opacity 0.2s ease-in-out;">Press DEL to open BIOS Settings.</div>
 	</body>
 	<script>
 		var loadElem = document.getElementById("loadText");
@@ -25,8 +25,14 @@
 				window.location.replace("bios.html");
 		});
 
+		var loadIcon = document.getElementById("loadIcon");
 		setTimeout(() => {
-			window.location.replace("login.html");
+			loadIcon.style.opacity = 0;
+			loadText.style.opacity = 0;
+			biosText.style.opacity = 0;
+			loadIcon.addEventListener("transitionend", (event) => {
+				window.location.replace("login.html");
+			})
 		}, 3000);
 	</script>
 </html>
