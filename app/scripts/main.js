@@ -3,16 +3,22 @@ const { encrypt } = require("../scripts/encryption");
 
 var taskbar = document.getElementById("taskbar");
 var curUser = fs.readFileSync("app/storage/electric/users/curUser",'utf8');
+var userSet = JSON.parse(fs.readFileSync(`app/storage/electric/users/${curUser}/settings.json`));
 
-function changeBg(path)
+var tempBg = document.getElementById("tempBg");
+var background = document.getElementById("background");
+function changeBg(path, noTransition=false)
 {
-	var tempBg = document.getElementById("tempBg");
-	var background = document.getElementById("background");
-	tempBg.src = path;
-	background.style.opacity = 0;
-	background.ontransitionend = function() {
+	if (noTransition)
 		background.src = path;
-		background.style.opacity = 1;
+	else
+	{
+		tempBg.src = path;
+		background.style.opacity = 0;
+		background.ontransitionend = function() {
+			background.src = path;
+			background.style.opacity = 1;
+		}
 	}
 }
 
@@ -66,6 +72,8 @@ function loaded()
 	
 	createTaskbarIcon("../storage/electric/apps/testApp.png");
 	console.log(curUser);
+	userText = document.getElementById("userText").innerText = `Welcome, ${userSet.displayName}.`;
+	changeBg(userSet.background, true);
 }
 
 function createUser(username, password)
