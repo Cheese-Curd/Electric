@@ -1,0 +1,39 @@
+/* This whole file is full of cursed numbers! */
+
+body {
+	background: white;
+}
+
+#main {
+	background: #151515;
+	position: absolute;
+	width: 99.3%; /* ahh, this is awful lmfao */
+	height: 666px;
+	margin: 5px;
+	border-radius: 8px;
+}
+
+#content {
+	background: #515151;
+	padding: 5px;
+	height: 90.5%;
+	margin: 5px;
+	border-radius: 8px;
+}
+
+#header {
+	background: #202020;
+	width: 100%;
+	position: relative;
+	right: 5px;
+	bottom: 5px;
+	padding: 5px;
+}
+
+.navBtn {
+	font-size: 28px;
+	padding: 0 5px 5px 0;
+	border-radius: 8px;
+	text-align: center;
+	margin: 5px 0 0 5px; 
+}
