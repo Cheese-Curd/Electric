@@ -8,7 +8,7 @@ body {
 	background: #151515;
 	position: absolute;
 	width: 99.3%; /* ahh, this is awful lmfao */
-	height: 666px;
+	height: 680px;
 	margin: 5px;
 	border-radius: 8px;
 }
@@ -35,5 +35,16 @@ body {
 	padding: 0 5px 5px 0;
 	border-radius: 8px;
 	text-align: center;
-	margin: 5px 0 0 5px; 
+	margin: 5px 0 0 5px;
+	transition: all 0.2s ease-in-out;
+}
+
+.navBtn:hover
+{
+	background: #808080;
+}
+
+.navBtn:active
+{
+	background: #535353;
 }

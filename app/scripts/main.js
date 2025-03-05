@@ -1,5 +1,6 @@
 const fs = require("fs");
 const { encrypt } = require("../scripts/encryption");
+const app = require("../scripts/application");
 
 var taskbar = document.getElementById("taskbar");
 var curUser = fs.readFileSync("app/storage/electric/users/curUser",'utf8');
@@ -20,6 +21,8 @@ function changeBg(path, noTransition=false)
 			background.style.opacity = 1;
 		}
 	}
+	userSet.background = path;
+	fs.writeFileSync(`app/storage/electric/users/${curUser}/settings.json`, JSON.stringify(userSet, null, 2), { encoding: 'utf8' })
 }
 
 function createTaskbarIcon(iconPath)
@@ -61,24 +64,24 @@ function toggleStartMenu()
 	// console.log(startMenuOpen);
 }
 
-function loaded()
+function createUserFolders(username)
 {
-	var blurDiv = document.getElementById("bluredDiv")
-	blurDiv.style.opacity = 0;
-	blurDiv.addEventListener("transitionend", (event) => {
-		taskbar.style.top = "650px";
-		blurDiv.remove();
-	});
-	
-	createTaskbarIcon("../storage/electric/apps/testApp.png");
-	console.log(curUser);
-	userText = document.getElementById("userText").innerText = `Welcome, ${userSet.displayName}.`;
-	changeBg(userSet.background, true);
+	// Normal folders
+	fs.mkdirSync(`app/storage/electric/users/${username}/Desktop`);
+	fs.mkdirSync(`app/storage/electric/users/${username}/Documents`);
+	fs.mkdirSync(`app/storage/electric/users/${username}/LocalData`);
+	// LocalData sub-folders
+	fs.mkdirSync(`app/storage/electric/users/${username}/LocalData/apps`);
+	fs.mkdirSync(`app/storage/electric/users/${username}/LocalData/appSettings`);
 }
 
-function createUser(username, password)
+function createUser(username, password, displayName)
 {
 	var userData = JSON.parse(fs.readFileSync("app/storage/electric/users/users.json"));
+
+	for (var i = 0; i < userData.users.length; i++)
+		if (userData.users[i].username == username)
+			return "Failed to create user: User already exists.";
 
 	// Create a backup first
 	fs.writeFileSync('app/storage/electric/users/users.json.BACKUP', JSON.stringify(userData, null, 2), { encoding: 'utf8' });
@@ -86,4 +89,51 @@ function createUser(username, password)
 	userData.users.push({"username": username, "password": encrypt(password)});
 	// Overwrite the file
 	fs.writeFileSync('app/storage/electric/users/users.json', JSON.stringify(userData, null, 2), { encoding: 'utf8' });
+	
+	var setting = {"background": "../storage/electric/background/welcome.png", "displayName": displayName}
+	if (!fs.existsSync(`app/storage/electric/users/${username}`))
+		fs.mkdirSync(`app/storage/electric/users/${username}`)
+	fs.writeFileSync(`app/storage/electric/users/${username}/settings.json`, JSON.stringify(setting, null, 2), { encoding: 'utf8' })
+	
+	createUserFolders(username);
+	return `Successfully created user with the username ${username}`;
+}
+
+var startmenuContent = document.getElementById("startContent")
+
+function createAppLink(name, appid)
+{
+	// startContentLink
+	var button = document.createElement("button");
+	button.classList.add("startContentLink");
+	button.innerText = name;
+	button.setAttribute("data-appid", appid);
+
+	startmenuContent.appendChild(button)
+	console.log("Created App Link")
+
+	button.addEventListener("click", () => {
+		var path = `storage/electric/apps/${button.getAttribute("data-appid")}`;
+		var appSettings = JSON.parse(fs.readFileSync(`app/${path}/settings.json`));
+
+		app.createWindow(`../${path}/${appSettings.mainFile}`, button.getAttribute("data-appid"), appSettings.title, appSettings.width, appSettings.height, appSettings.canMaximize);
+	})
+}
+
+function loaded()
+{
+	var blurDiv = document.getElementById("bluredDiv")
+	blurDiv.style.opacity = 0;
+	blurDiv.addEventListener("transitionend", (event) => {
+		taskbar.style.marginBottom = "0";
+		blurDiv.remove();
+	});
+	
+	createTaskbarIcon("../storage/electric/apps/testApp.png"); 
+	app.loadVariables();
+	createAppLink("Settings", "settings");
+
+	console.log(curUser);
+	document.getElementById("userText").innerText = `Welcome, ${userSet.displayName}.`;
+	changeBg(userSet.background);
 }

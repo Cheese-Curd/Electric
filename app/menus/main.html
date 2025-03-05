@@ -3,6 +3,7 @@
 	<head>
 		<title>Electric</title>
 		<link rel="stylesheet" href="./styles/main.css">
+		<link rel="stylesheet" href="./styles/app.css">
 		<link rel="stylesheet" href="./styles/os.css">
 	</head>
 	<body onload="loaded()">
@@ -10,14 +11,11 @@
 		<div id="bluredDiv"></div>
 		<img id="background" width="1280px" height="720px" src="../storage/electric/background/welcome.png">
 		<img id="tempBg" width="1280px" height="720px">
+		<!-- This is the container for all the apps -->
+		<div id="apps"></div>
 		<div id="startmenu">
 			<p style="background: rgba(0, 0, 0, 0.3);">Applications & Files</p>
-			<div id="startContent">
-				<button class="startContentLink">App Name</button>
-				<button class="startContentLink">App Name</button>
-				<button class="startContentLink">App Name</button>
-				<button class="startContentLink">App Name</button>
-			</div>
+			<div id="startContent"></div>
 			<div id="startMenuFooter">
 				<p id="userText"></p>
 			</div>
@@ -27,5 +25,6 @@
 			<span><button onclick="toggleStartMenu()" class="taskbarIcon" id="startButton"><img src="../svgs/system/start.svg" width="32" height="32"></button></span>
 		</div>
 		<script src="../scripts/main.js"></script>
+		<script src="../scripts/application.js"></script>
 	</body>
 </html>

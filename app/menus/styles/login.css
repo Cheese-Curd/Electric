@@ -26,17 +26,18 @@
 
 #loginBtn {
 	text-align: center;
+	box-shadow: #707070 4px 3px 16px 0px;
 }
 
 #loginBox {
 	background: white;
 	border-radius: 8px;
-    height: 200px;
-    width: 200px;
-    display: grid;
-    margin: 250px auto auto auto;
-    align-items: center;
-    justify-content: center;
+	height: 200px;
+	width: 200px;
+	display: grid;
+	margin: 250px auto auto auto;
+	align-items: center;
+	justify-content: center;
 	opacity: 0;
 	transition: all 0.2s ease-in-out;
 }
@@ -50,9 +51,9 @@
 	padding-right: 15px;
 	margin: auto;
 	margin-top: 15px;
-    display: grid;
-    align-items: center;
-    justify-content: center;
+	display: grid;
+	align-items: center;
+	justify-content: center;
 	color: red;
 	transition: all 0.2s ease-in-out;
 	opacity: 0;

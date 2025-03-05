@@ -4,7 +4,7 @@
   "description": "An Electron OS Application",
   "main": "app.js",
   "scripts": {
-    "test": "electron ."
+    "test": "electron . --trace-warnings"
   },
   "author": "Eliana",
   "license": "ISC",

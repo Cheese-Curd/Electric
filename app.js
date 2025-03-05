@@ -6,6 +6,7 @@ function createWindow() {
 		width: 1280,
 		height: 720,
 		resizable: false, // No resizing :3
+		titleBarStyle: 'hidden', // No titlebar?
 
 		webPreferences: {
 			preload: path.join(__dirname, 'app/scripts/main.js'),

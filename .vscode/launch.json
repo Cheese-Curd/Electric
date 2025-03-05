@@ -8,6 +8,7 @@
 			"name": "Electron Main",
 			"program": "${workspaceFolder}/app.js",
 			"request": "launch",
+			"args": ["--trace-warnings"],
 			"runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
 			"skipFiles": [
 				"<node_internals>/**"

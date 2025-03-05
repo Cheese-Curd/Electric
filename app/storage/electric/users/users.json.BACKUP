@@ -6,13 +6,6 @@
         "iv": "fa7006b1589fa1e78e3e0a64db3d98cf",
         "encryptedData": "2107632763f0d9bdde64ab36bf1fb288"
       }
-    },
-    {
-      "username": "eliana",
-      "password": {
-        "iv": "7d7f6c62e652994c82d8047acd5c38cb",
-        "encryptedData": "b9b2cb144fb365ff7ec9c8b1bda9e0a1"
-      }
     }
   ]
 }
